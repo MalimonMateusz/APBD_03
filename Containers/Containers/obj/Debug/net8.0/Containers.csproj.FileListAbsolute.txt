@@ -1,0 +1,15 @@
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\bin\Debug\net8.0\Containers.exe
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\bin\Debug\net8.0\Containers.deps.json
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\bin\Debug\net8.0\Containers.runtimeconfig.json
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\bin\Debug\net8.0\Containers.dll
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\bin\Debug\net8.0\Containers.pdb
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.AssemblyInfoInputs.cache
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.AssemblyInfo.cs
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.csproj.CoreCompileInputs.cache
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.sourcelink.json
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.dll
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\refint\Containers.dll
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.pdb
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\Containers.genruntimeconfig.cache
+C:\Users\matim\Documents\GitHub\APBD_03\Containers\Containers\obj\Debug\net8.0\ref\Containers.dll
