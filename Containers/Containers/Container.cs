@@ -18,12 +18,12 @@ public class Container : IHazardNotifier
         this.maximumLoad = maximumLoad;
     }
 
-     protected virtual void dropLoad()
+     public virtual void dropLoad()
     {
         loadWeight = 0;
     }
 
-    protected virtual void load(int load)
+   public virtual void load(int load)
     {
         if (maximumLoad*0.9 < this.loadWeight + load){
             hazard();
@@ -35,17 +35,21 @@ public class Container : IHazardNotifier
        
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+    public virtual void info()
+    {
+        Console.WriteLine("Serial Number: " + serialNumber);
+        Console.WriteLine();
+        Console.WriteLine("Height: " + hight);
+        Console.WriteLine("Load Weight: " + loadWeight);
+        Console.WriteLine("Depth: " + depth);
+        Console.WriteLine("Maximum Load: " + maximumLoad);
+        Console.WriteLine("Container Mass: "  + containerMass);
+       
+        
+    }
+
 
     public void hazard()
     {

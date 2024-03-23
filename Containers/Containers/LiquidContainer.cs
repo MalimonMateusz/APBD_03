@@ -13,7 +13,7 @@ public class LiquidContainer : Container, IHazardNotifier
         serialNum++;
     }
 
-    protected override void load(int load)
+    public override void load(int load)
     {
         Console.WriteLine("Is the stuff hazardous, type YES or NO");
         String hazardouss = Console.ReadLine();
@@ -44,7 +44,7 @@ public class LiquidContainer : Container, IHazardNotifier
     }
 
 
-    protected override void dropLoad()
+    public override void dropLoad()
     {
         base.dropLoad();
         this.hazardous = false;

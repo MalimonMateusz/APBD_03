@@ -17,13 +17,13 @@ public class CoolingContainer : Container
         products = productDictionary(products);
     }
 
-    protected override void dropLoad()
+    public override void dropLoad()
     {
         base.dropLoad();
         this.product = "None";
     }
 
-    protected override void load(int load)
+    public override void load(int load)
     {
         Console.WriteLine("Pick product to load:");
         Console.WriteLine();
@@ -60,6 +60,14 @@ public class CoolingContainer : Container
                 Console.WriteLine("This product is not on a list!");
             }
         }
+    }
+
+
+    public override void info()
+    {
+        base.info();
+        Console.WriteLine("Temperature: " + temperature);
+        Console.WriteLine("Product: " + product);
     }
 
 

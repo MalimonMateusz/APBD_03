@@ -9,8 +9,8 @@ class Program
     static void Main(string[] args)
     {
         options = opt(options);
-        
-        
+
+
         Greetings();
         while (true)
         {
@@ -26,34 +26,286 @@ class Program
     }
 
 
-
-
-
     public static Boolean action(int choice)
     {
         switch (choice)
         {
             case 1:
+                //container Ship Add
                 containerShipAdd();
                 return false;
             case 2:
+                //Container add
                 containerAdd();
                 return false;
-              
-            case 10:
-                
-                
+            case 3:
+                //Remove Container From a Ship
+                removeContainerFromShip();
                 return false;
+            case 4:
+                SwapContainersOnTheShip();
+                return false;
+            case 5:
+                //Move Container From Ship To Another One
+                MoveContainerFromShipToAnotherOne();
+                return false;
+            case 6:
+                //Show Info About The Ship
+                shipInfo();
+                return false;
+            case 7:
+                //Load Container With A Product
+                loadContainer();
+                return false;
+            case 8:
+                //Show Info About The Container
+                containerInfo();
+                return false;
+            case 9:
+                //Unload the Container
+                unloadContainer();
+                return false;
+            case 10:
+                //Load Container On a Ship
+                loadContainerOnShip();
+                return false;
+            case 11:
+                //Load List of Containers On a Ship
+                LoadListofContainersOnShip();  //NOT IMPLEMENTED YET
+                return false;
+            case 0:
+                return true;
             default:
                 return true;
-            
         }
     }
 
 
-
-
 //ACTIONS
+
+    public static void MoveContainerFromShipToAnotherOne()
+    {
+        int temp = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(temp + ". " + ship.Name);
+            temp++;
+        }
+        Console.Write("Insert the number of a Ship (from): ");
+        int choosenShip1 = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+        temp = 1;
+        foreach (var container in containerShipsList[choosenShip1].Containers)   
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        Console.WriteLine();
+        int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+        temp = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(temp + ". " + ship.Name);
+            temp++;
+        }
+        Console.Write("Insert the number of a Ship (to): ");
+        int choosenShip2 = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (containerShipsList[choosenShip1].Containers.Count == 0)
+        {
+            Console.WriteLine("NO CONTAINERS");
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadLine();
+        }
+        else
+        {
+            containerShipsList[choosenShip2].Containers.Add(containerShipsList[choosenShip1].Containers[choosenContainer]);
+            containerShipsList[choosenShip1].Containers.RemoveAt(choosenContainer);  
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadLine();
+        }
+      
+    }
+
+    public static void SwapContainersOnTheShip()
+    {
+        int temp = 1;
+        foreach (var container in containerList)
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        int choosenContainer1 = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+        temp = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(temp + ". " + ship.Name);
+            temp++;
+        }
+        Console.Write("Insert the number of a ship: ");
+        int choosenShip = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+         temp = 1;
+        foreach (var container in containerShipsList[choosenShip].Containers)   
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        int choosenContainer2 = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+        
+        containerShipsList[choosenShip].Containers.Add(containerList[choosenContainer1]);
+        containerList.RemoveAt(choosenContainer1);
+        containerList.Add( containerShipsList[choosenShip].Containers[choosenContainer2]);
+        containerShipsList[choosenShip].Containers.RemoveAt(choosenContainer2);
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
+
+    public static void LoadListofContainersOnShip()
+    {
+        List<Container> containers = new List<Container>();
+        
+    }
+
+
+    public static void loadContainer()
+    {
+        int temp = 1;
+        foreach (var container in containerList)
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
+        Console.Write("Insert weight of the product: ");
+        containerList[choosenContainer].load(Convert.ToInt32(Console.ReadLine()));
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
+
+    public static void  unloadContainer()
+    {
+        int temp = 1;
+        foreach (var container in containerList)
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
+        containerList[choosenContainer].dropLoad();
+        Console.WriteLine( containerList[choosenContainer].SerialNumber + "has been unloaded!");
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
+
+    public static void loadContainerOnShip()
+    {
+        int temp = 1;
+        foreach (var container in containerList)
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+        Console.WriteLine();
+        Console.Write("Insert the number of a container: ");
+        int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+        temp = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(temp + ". " + ship.Name);
+            temp++;
+        }
+        Console.Write("Insert the number of a container: ");
+        int choosenShip = Convert.ToInt32(Console.ReadLine()) - 1;
+        containerShipsList[choosenShip].Containers.Add(containerList[choosenContainer]);
+        containerList.RemoveAt(choosenContainer);
+        
+    }
+
+    public static void shipInfo()
+    {
+        int temp = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(temp + ". " + ship.Name);
+            temp++;
+        }
+
+        Console.Write("Insert the number of a ship: ");
+        int choosen = Convert.ToInt32(Console.ReadLine()) - 1;
+        Console.WriteLine();
+        containerShipsList[choosen].info();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
+
+
+    public static void containerInfo()
+    {
+        int temp = 1;
+        foreach (var container in containerList)
+        {
+            Console.WriteLine(temp + ". " + container.SerialNumber);
+            temp++;
+        }
+
+        Console.Write("Insert the number of a container: ");
+        int choosen = Convert.ToInt32(Console.ReadLine()) - 1;
+        containerList[choosen].info();
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
+
+
+    public static void removeContainerFromShip()
+    {
+        int numberOfShips = 1;
+        int numberOfContainers = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(numberOfShips + ". " + containerShipsList[numberOfShips - 1].Name1);
+            numberOfShips++;
+        }
+
+
+        Console.Write("Type numer of the ship: ");
+        int chosenOne = Convert.ToInt32(Console.ReadLine());
+        if (containerShipsList[chosenOne].Containers.Count == 0)
+        {
+            Console.WriteLine("This ship does not have any containers on board!");
+        }
+        else
+        {
+            foreach (var container in containerShipsList[chosenOne].Containers)
+            {
+                Console.WriteLine(numberOfContainers + ". " + container.SerialNumber);
+                numberOfContainers++;
+            }
+
+            Console.WriteLine();
+            Console.Write("Type number of the container: ");
+            int choosenContainer = Convert.ToInt32(Console.ReadLine());
+            
+            containerList.Add(containerShipsList[chosenOne].Containers[choosenContainer]);
+            containerShipsList[chosenOne].Containers.RemoveAt(choosenContainer);
+        }
+    }
+
 
     public static void containerShipAdd()
     {
@@ -69,7 +321,6 @@ class Program
     }
 
 
-
     public static void containerAdd()
     {
         Console.Write("1.Liquid  2.Gas  3.Cooling: ");
@@ -77,120 +328,66 @@ class Program
 
         switch (type)
         {
-           case 1:
-               Console.Write("Type hight of the container: ");
-               Double heightL = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type weight of the container: ");
-               Double containerMassL = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the depth of the container: ");
-               Double depthL = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the maximum load of the container: ");
-               int maxContainersWeightL = Convert.ToInt32(Console.ReadLine());
-               containerList.Add(new LiquidContainer(heightL,containerMassL, depthL,maxContainersWeightL));
-               break;
-           case 2:
-               Console.Write("Type hight of the container: ");
-               Double heightG = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type weight of the container: ");
-               Double containerMassG = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the depth of the container: ");
-               Double depthG = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the maximum load of the container: ");
-               int maxContainersWeightG = Convert.ToInt32(Console.ReadLine());
-               Console.Write("Type the pressure of the container: ");
-               Double pressureG = Convert.ToDouble(Console.ReadLine());
-               containerList.Add(new GasContainer(heightG,containerMassG, depthG,maxContainersWeightG, pressureG));
-               break;
-           case 3:
-               Console.Write("Type hight of the container: ");
-               Double heightC = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type weight of the container: ");
-               Double containerMassC = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the depth of the container: ");
-               Double depthC = Convert.ToDouble(Console.ReadLine());
-               Console.Write("Type the maximum load of the container: ");
-               int maxContainersWeightC = Convert.ToInt32(Console.ReadLine());
-               Console.Write("Type the pressure of the container: ");
-               Double temperatureC = Convert.ToDouble(Console.ReadLine());
-               containerList.Add(new GasContainer(heightC,containerMassC, depthC,maxContainersWeightC, temperatureC));
-               break;
-           default:
-               Console.WriteLine("Invalid Input");
-               break;
+            case 1:
+                Console.Write("Type hight of the container: ");
+                Double heightL = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type weight of the container: ");
+                Double containerMassL = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the depth of the container: ");
+                Double depthL = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the maximum load of the container: ");
+                int maxContainersWeightL = Convert.ToInt32(Console.ReadLine());
+                containerList.Add(new LiquidContainer(heightL, containerMassL, depthL, maxContainersWeightL));
+                break;
+            case 2:
+                Console.Write("Type hight of the container: ");
+                Double heightG = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type weight of the container: ");
+                Double containerMassG = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the depth of the container: ");
+                Double depthG = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the maximum load of the container: ");
+                int maxContainersWeightG = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Type the pressure of the container: ");
+                Double pressureG = Convert.ToDouble(Console.ReadLine());
+                containerList.Add(
+                    new GasContainer(heightG, containerMassG, depthG, maxContainersWeightG, pressureG));
+                break;
+            case 3:
+                Console.Write("Type hight of the container: ");
+                Double heightC = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type weight of the container: ");
+                Double containerMassC = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the depth of the container: ");
+                Double depthC = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Type the maximum load of the container: ");
+                int maxContainersWeightC = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Type the pressure of the container: ");
+                Double temperatureC = Convert.ToDouble(Console.ReadLine());
+                containerList.Add(new GasContainer(heightC, containerMassC, depthC, maxContainersWeightC,
+                    temperatureC));
+                break;
+            default:
+                Console.WriteLine("Invalid Input");
+                break;
         }
-        
-        
-       
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //MENU AND STUFF
-    
+
     public static int possibleActions()
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Possible Actions:");
-        Console.WriteLine();
+        Console.ResetColor();
         int optionsNum = 1;
         int skip = 0;
-        
+
         Console.WriteLine(optionsNum + ". " + options[0]);
         optionsNum++;
         Console.WriteLine(optionsNum + ". " + options[1]);
+        optionsNum++;
         if (containerShipsList.Count != 0)
         {
             Console.WriteLine(optionsNum + ". " + options[2]);
@@ -201,26 +398,31 @@ class Program
             optionsNum++;
             Console.WriteLine(optionsNum + ". " + options[5]);
             optionsNum++;
-        }else skip = 4;
-        
+        }
+        else skip = 4;
+
 
         if (containerList.Count != 0)
         {
-            Console.WriteLine(optionsNum + ". " + options[6]); 
+            Console.WriteLine(optionsNum + ". " + options[6]);
             optionsNum++;
-            Console.WriteLine(optionsNum + ". " + options[7]); 
+            Console.WriteLine(optionsNum + ". " + options[7]);
             optionsNum++;
-            Console.WriteLine(optionsNum + ". " + options[8]); 
+            Console.WriteLine(optionsNum + ". " + options[8]);
             optionsNum++;
-        } else skip = 0;
+        }
+        else skip = 0;
 
         if (containerShipsList.Count != 0 && containerList.Count != 0)
         {
-            Console.WriteLine(optionsNum + ". " + options[9]); 
+            Console.WriteLine(optionsNum + ". " + options[9]);
             optionsNum++;
             Console.WriteLine(optionsNum + ". " + options[10]);
         }
+
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Type 0 to exit");
+        Console.ResetColor();
         Console.WriteLine();
         int choice = Convert.ToInt32(Console.ReadLine()) + skip;
         return choice;
@@ -230,7 +432,9 @@ class Program
     public static void Menu()
     {
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("List of Container Ships:");
+        Console.ResetColor();
         if (containerShipsList.Count == 0)
         {
             Console.WriteLine("None");
@@ -246,8 +450,9 @@ class Program
 
         Console.WriteLine();
         Console.WriteLine();
-
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("List of Containers:");
+        Console.ResetColor();
         if (containerList.Count == 0)
         {
             Console.WriteLine("None");
@@ -268,7 +473,7 @@ class Program
     {
         a.Add("Add Container Ship");
         a.Add("Add Container");
-        
+
         a.Add("Remove Container From a Ship");
         a.Add("Swap Containers On The Ship");
         a.Add("Move Container From Ship To Another One");
@@ -278,7 +483,7 @@ class Program
         a.Add("Load Container With A Product");
         a.Add("Show Info About The Container");
         a.Add("Unload the Container");
-        
+
         a.Add("Load Container On a Ship");
         a.Add("Load List of Containers On a Ship");
         // 2 4 3 2
@@ -292,8 +497,13 @@ class Program
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine("The official program for the Port of Rotterdam");
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+        Console.WriteLine("Port of Rotterdam");
+        Console.ResetColor();
         //Thread.Sleep(3000);
         Console.WriteLine();
     }
+    
+    
+   
 }

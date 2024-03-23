@@ -12,7 +12,7 @@ public class GasContainer : Container, IHazardNotifier
          this.pressure = pressure;
      }
   
-     protected override void load(int load)
+     public override void load(int load)
      {
          if(maximumLoad/2 >this.loadWeight + load){ hazard();}
          else
@@ -22,7 +22,7 @@ public class GasContainer : Container, IHazardNotifier
       
      }
 
-     protected override void dropLoad()
+     public override void dropLoad()
      {
          this.loadWeight = this.loadWeight * 0.05;
      }
@@ -33,5 +33,10 @@ public class GasContainer : Container, IHazardNotifier
     Console.WriteLine("Hazard! " + this.serialNumber);    
   }
 
-  
+
+     public override void info()
+     {
+         base.info();
+         Console.WriteLine("Pressure: " + pressure);
+     }
  }

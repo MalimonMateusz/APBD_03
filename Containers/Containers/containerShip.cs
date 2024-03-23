@@ -16,22 +16,35 @@ public class containerShip
          this.maxNumOfContainers = maxNumOfContainers;
          this.maxContainersWeight = maxContainersWeight;
      }
+
+
+
+
+
+
+     public void info()
+     {
+         Console.WriteLine("Name: " + name);
+         Console.WriteLine("MaxSpeed: " + maxSpeed);
+         Console.WriteLine("Maximum Number Of Containers: " + maxNumOfContainers);
+         Console.WriteLine("Maximum Containers' Weight: " + maxContainersWeight);
+         Console.WriteLine("Containers on board: ");
+         Console.WriteLine();
+         foreach (var container in containers)
+         {
+             Console.WriteLine(container.SerialNumber);
+         }
+     }
      
      
      
-     
-     
-     
-    
-     
-     
-     
-     
-     
-     
-     
-     
-     
+     public string Name1
+     {
+         get => name;
+         set => name = value ?? throw new ArgumentNullException(nameof(value));
+     }
+
+
      public List<Container> Containers
      {
          get => containers;
