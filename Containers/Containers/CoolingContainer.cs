@@ -55,10 +55,6 @@ public class CoolingContainer : Container
                     Console.WriteLine("This container does not meet temperature requirements for this product!");
                 }
             }
-            else
-            {
-                Console.WriteLine("This product is not on a list!");
-            }
         }
     }
 

@@ -362,9 +362,9 @@ class Program
                 Double depthC = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Type the maximum load of the container: ");
                 int maxContainersWeightC = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Type the pressure of the container: ");
+                Console.Write("Type the temperature of the container: ");
                 Double temperatureC = Convert.ToDouble(Console.ReadLine());
-                containerList.Add(new GasContainer(heightC, containerMassC, depthC, maxContainersWeightC,
+                containerList.Add(new CoolingContainer(heightC, containerMassC, depthC, maxContainersWeightC,
                     temperatureC));
                 break;
             default:
@@ -424,8 +424,18 @@ class Program
         Console.WriteLine("Type 0 to exit");
         Console.ResetColor();
         Console.WriteLine();
-        int choice = Convert.ToInt32(Console.ReadLine()) + skip;
-        return choice;
+        int choice = Convert.ToInt32(Console.ReadLine());
+        if (choice == 1 || choice == 2)
+        {
+            return choice;
+        }
+        else
+        {
+            return choice  + skip;
+        }
+        
+        
+        
     }
 
 
