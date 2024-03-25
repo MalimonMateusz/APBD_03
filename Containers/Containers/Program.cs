@@ -71,7 +71,7 @@ class Program
                 return false;
             case 11:
                 //Load List of Containers On a Ship
-                LoadListofContainersOnShip();  //NOT IMPLEMENTED YET
+                LoadListofContainersOnShip();  
                 return false;
             case 0:
                 return true;
@@ -85,48 +85,57 @@ class Program
 
     public static void MoveContainerFromShipToAnotherOne()
     {
-        int temp = 1;
-        foreach (var ship in containerShipsList)
+        if (containerShipsList.Count < 2)
         {
-            Console.WriteLine(temp + ". " + ship.Name);
-            temp++;
-        }
-        Console.Write("Insert the number of a Ship (from): ");
-        int choosenShip1 = Convert.ToInt32(Console.ReadLine()) - 1;
-        
-        temp = 1;
-        foreach (var container in containerShipsList[choosenShip1].Containers)   
-        {
-            Console.WriteLine(temp + ". " + container.SerialNumber);
-            temp++;
-        }
-        Console.WriteLine();
-        Console.Write("Insert the number of a container: ");
-        Console.WriteLine();
-        int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
-        
-        temp = 1;
-        foreach (var ship in containerShipsList)
-        {
-            Console.WriteLine(temp + ". " + ship.Name);
-            temp++;
-        }
-        Console.Write("Insert the number of a Ship (to): ");
-        int choosenShip2 = Convert.ToInt32(Console.ReadLine()) - 1;
-
-        if (containerShipsList[choosenShip1].Containers.Count == 0)
-        {
-            Console.WriteLine("NO CONTAINERS");
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadLine();
+            Console.WriteLine("Not enough ships!!!!!!!");
+            Thread.Sleep(3000);
         }
         else
         {
-            containerShipsList[choosenShip2].Containers.Add(containerShipsList[choosenShip1].Containers[choosenContainer]);
-            containerShipsList[choosenShip1].Containers.RemoveAt(choosenContainer);  
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadLine();
+            int temp = 1;
+            foreach (var ship in containerShipsList)
+            {
+                Console.WriteLine(temp + ". " + ship.Name);
+                temp++;
+            }
+            Console.Write("Insert the number of a Ship (from): ");
+            int choosenShip1 = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+            temp = 1;
+            foreach (var container in containerShipsList[choosenShip1].Containers)   
+            {
+                Console.WriteLine(temp + ". " + container.SerialNumber);
+                temp++;
+            }
+            Console.WriteLine();
+            Console.Write("Insert the number of a container: ");
+            Console.WriteLine();
+            int choosenContainer = Convert.ToInt32(Console.ReadLine()) - 1;
+        
+            temp = 1;
+            foreach (var ship in containerShipsList)
+            {
+                Console.WriteLine(temp + ". " + ship.Name);
+                temp++;
+            }
+            Console.Write("Insert the number of a Ship (to): ");
+            int choosenShip2 = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            if (containerShipsList[choosenShip1].Containers.Count == 0)
+            {
+                Console.WriteLine("NO CONTAINERS");
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadLine();
+            }
+            else
+            {
+                containerShipsList[choosenShip2].Containers.Add(containerShipsList[choosenShip1].Containers[choosenContainer]);
+                containerShipsList[choosenShip1].Containers.RemoveAt(choosenContainer);  
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadLine();
+            }
         }
+       
       
     }
 
@@ -173,6 +182,52 @@ class Program
     public static void LoadListofContainersOnShip()
     {
         List<Container> containers = new List<Container>();
+
+        while (true)
+        {
+            int a = 1;
+            foreach (var container in containerList)
+            {
+                Console.WriteLine(a++ + ". " + container.SerialNumber);
+            }
+            Console.WriteLine("Insert the number of the container:");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            containers.Add(containerList[choice-1]);
+            containerList.RemoveAt(choice-1);
+            Console.WriteLine();
+            Console.WriteLine("Current state of the list:");
+            foreach (var container in containers)
+            {
+                Console.WriteLine(container.SerialNumber);
+            }
+            
+            Console.WriteLine("Do you want to add more containers to the list? Type YES or NO");
+
+            if (Console.ReadLine().Equals("YES"))
+            {
+                if (containerList.Count == 0)
+                {
+                    Console.WriteLine("No more containers to load!");
+                    Thread.Sleep(3000);
+                    break;
+                }
+            }else break;
+        }
+
+        int b = 1;
+        foreach (var ship in containerShipsList)
+        {
+            Console.WriteLine(b++ + ". " + ship.Name);
+        }
+        Console.WriteLine("Insert the number of the ship:");
+        int choosenShip = Convert.ToInt32(Console.ReadLine()) -1 ;
+        foreach (var container in containers)
+        {
+            containerShipsList[choosenShip].Containers.Add(container);
+        }
+        
+        
+        
         
     }
 
